@@ -1,0 +1,128 @@
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+   	html { margin:0; padding:0; font-size:62.5%; }
+   	body { max-width:1300px; min-width:300px; margin:0 auto; padding:20px 10px; font-size:14px; font-size:1.4em; }
+   	h1 { font-size:1.8em; text-align: center;}
+   	.demo { overflow:auto; border:1px solid silver; min-height:600px;max-width: 500px; margin-top: 20px;}
+	#file1{float: left;width: 450px;padding: 20px;}
+	#file2{float: left;width: 450px;padding: 20px;}
+	#result{float: left;width: 200px;padding: 20px;}
+	
+    </style>
+    <link/>
+    <link rel="stylesheet"  th:href="@{/static/jstree/dist/themes/default/style.min.css}"/>
+</head>
+<body>
+
+
+
+	<div id="file1">
+		<h1>文件一</h1>
+		<input type="file" id="file" name="myfile" />
+
+		<input type="button" onclick="UpladFile()" value="上传" />
+		<div id="tree1" class="demo"></div>
+	</div>
+	
+	<div id="result">
+		<h1>结果</h1>
+		<button id="evts_button">select node with id 1</button>
+		<em>either click the button or a node in the tree</em>
+		<div id="evts"></div>
+	</div>
+	
+	<div id="file2">
+		<h1>文件二</h1>
+		<input type="file" id="file" name="myfile" />
+		
+		<input type="button" onclick="UpladFile()" value="上传" />
+		<div id="tree2" class="demo">haha</div>
+	</div>
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript"   th:src="@{/static/jstree/dist/jstree.min.js}" rel="stylesheet"></script>
+
+<script>
+
+	function UpladFile(){
+		var type = "file";          //后台接收时需要的参数名称，自定义即可
+		var id = "file";            //即input的id，用来寻找值
+		var formData = new FormData();
+		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
+
+		$.ajax({
+			type: "POST",           //因为是传输文件，所以必须是post
+			url: '/upload',         //对应的后台处理类的地址
+			data: formData,
+			processData: false,
+			contentType: false,
+			dataType: 'json',
+			success: function (data) {
+
+				var jsonstr="[]";
+				var jsonarray = eval('('+jsonstr+')');
+				 var arrays= data;
+
+				for(var i=0 ; i<arrays.length; i++){
+				    var arr = {
+				            "id":arrays[i].id,
+				            "parent":arrays[i].parent,
+				            "text":arrays[i].text,
+							"icon":arrays[i].icon
+				    }
+				    jsonarray.push(arr);
+				}
+				<!--console.log(jsonarray);-->
+				$('#tree1').data('jstree', false).empty();
+					$('#tree1').jstree({
+					'core' : {
+						'data' :
+						jsonarray
+					}
+				});
+				jsonarray = null;
+			}
+		});
+	}
+
+   	// inline data demo
+   
+
+   
+   	// interaction and events
+   	$('#evts_button').on("click", function () {
+   		var instance = $('#evts').jstree(true);
+   		instance.deselect_all();
+   		instance.select_node('1');
+   	});
+   	$('#evts')
+   		.on("changed.jstree", function (e, data) {
+   			if(data.selected.length) {
+   				alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+   			}
+   		})
+   		.jstree({
+   			'core' : {
+   				'multiple' : false,
+   				'data' : [
+   					{ "text" : "Root node", "children" : [
+   							{ "text" : "Child node 1", "id" : 1 },
+   							{ "text" : "Child node 2" }
+   					]}
+   				]
+   			}
+   		});
+
+
+</script>
+</body>
+</html>
