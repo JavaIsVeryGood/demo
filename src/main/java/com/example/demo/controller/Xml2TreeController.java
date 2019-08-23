@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
-public class Xml2Tree {
+public class Xml2TreeController {
 
     @RequestMapping(value = {"/","/index"})
    // @ResponseBody
