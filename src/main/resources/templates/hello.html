@@ -17,51 +17,12 @@
     </style>
     <link/>
     <link rel="stylesheet"  th:href="@{/static/jstree/dist/themes/default/style.min.css}"/>
-</head>
-<body>
-
-
-
-	<div id="file1">
-		<h1>文件一</h1>
-		<input type="file" id="filename1" name="myfile" />
-
-		<input type="button" onclick="UpladFile1()" value="上传" />
-		<div id="tree1" class="demo"></div>
-	</div>
-
-	<div id="result">
-		<div class="xpath1">
-			节点一：<input type="text" class="xpath" placeholder="请点选文件一节点或者自行输入"/>
-		</div>
-		
-		
-		<div class="xpath2">
-			节点二：<input type="text" class="xpath" placeholder="请点选文件二节点或者自行输入" />
-		</div>
-		<button id="save_button">添加这对节点</button>
-		
-	</div>
-
-	<div id="file2">
-		<h1>文件二</h1>
-		<input type="file" id="filename2" name="myfile" />
-
-		<input type="button" onclick="UpladFile2()" value="上传" />
-		<div id="tree2" class="demo"></div>
-	</div>
-
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript"   th:src="@{/static/jstree/dist/jstree.min.js}" rel="stylesheet"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript"   th:src="@{/static/jstree/dist/jstree.min.js}" rel="stylesheet"></script>
 
 <script>
 
-	function UpladFile1(){
+	function UploadFile1(){
 		var type = "file";          //后台接收时需要的参数名称，自定义即可
 		var id = "filename1";            //即input的id，用来寻找值
 		var formData = new FormData();
@@ -102,7 +63,7 @@
 		});
 	}
 	
-	function UpladFile2(){
+	function UploadFile2(){
 		//alert(type);
 		var type = "file";          //后台接收时需要的参数名称，自定义即可
 		var id = "filename2";            //即input的id，用来寻找值
@@ -174,5 +135,46 @@
 
 
 </script>
+</head>
+<body>
+
+
+
+	<div id="file1">
+		<h1>文件一</h1>
+		<input type="file" id="filename1" name="myfile" />
+
+		<input type="button" onclick="UploadFile1()" value="上传" />
+		<div id="tree1" class="demo"></div>
+	</div>
+
+	<div id="result">
+		<div class="xpath1">
+			节点一：<input type="text" class="xpath" placeholder="请点选文件一节点或者自行输入"/>
+		</div>
+		
+		
+		<div class="xpath2">
+			节点二：<input type="text" class="xpath" placeholder="请点选文件二节点或者自行输入" />
+		</div>
+		<button id="save_button">添加这对节点</button>
+		
+	</div>
+
+	<div id="file2">
+		<h1>文件二</h1>
+		<input type="file" id="filename2" name="myfile" />
+
+		<input type="button" onclick="UpladFile2()" value="上传" />
+		<div id="tree2" class="demo"></div>
+	</div>
+
+
+
+
+
+
+
+
 </body>
 </html>
