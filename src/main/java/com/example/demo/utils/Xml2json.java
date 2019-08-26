@@ -24,7 +24,7 @@ public class Xml2json {
         try {
             //in = new FileInputStream(new File("C:\\Users\\jinhui.huang\\Downloads\\1OJ_FareReShopperRS.xml"));
             String xml = IOUtils.toString(in,"utf-8");
-            System.out.println(xml);
+            //System.out.println(xml);
             xmlJSONObj = XML.toJSONObject(xml);
             //String jsonPrettyPrintString = xmlJSONObj.toString(4);       //设置缩进
             System.out.println(xmlJSONObj);

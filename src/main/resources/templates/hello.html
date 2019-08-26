@@ -20,120 +20,121 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript"   th:src="@{/static/jstree/dist/jstree.min.js}" rel="stylesheet"></script>
 
-	<script>
+<script>
 
-		function UploadFile1(){
-			var type = "file";          //后台接收时需要的参数名称，自定义即可
-			var id = "file";            //即input的id，用来寻找值
-			var formData = new FormData();
-			formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
+	function UploadFile1(){
+		var type = "file";          //后台接收时需要的参数名称，自定义即可
+		var id = "filename1";            //即input的id，用来寻找值
+		var formData = new FormData();
+		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
 
-			$.ajax({
-				type: "POST",           //因为是传输文件，所以必须是post
-				url: '/upload',         //对应的后台处理类的地址
-				data: formData,
-				processData: false,
-				contentType: false,
-				dataType: 'json',
-				success: function (data) {
+		$.ajax({
+			type: "POST",           //因为是传输文件，所以必须是post
+			url: '/upload',         //对应的后台处理类的地址
+			data: formData,
+			processData: false,
+			contentType: false,
+			dataType: 'json',
+			success: function (data) {
 
-					var jsonstr="[]";
-					var jsonarray = eval('('+jsonstr+')');
-					var arrays= data;
+				var jsonstr="[]";
+				var jsonarray = eval('('+jsonstr+')');
+				 var arrays= data;
 
-					for(var i=0 ; i<arrays.length; i++){
-						var arr = {
-							"id":arrays[i].id,
-							"parent":arrays[i].parent,
-							"text":arrays[i].text,
+				for(var i=0 ; i<arrays.length; i++){
+				    var arr = {
+				            "id":arrays[i].id,
+				            "parent":arrays[i].parent,
+				            "text":arrays[i].text,
 							"icon":arrays[i].icon
-						}
-						jsonarray.push(arr);
-					}
-					<!--console.log(jsonarray);-->
-					$('#tree1').data('jstree', false).empty();
+				    }
+				    jsonarray.push(arr);
+				}
+				console.log(jsonarray);
+				//$('#tree1').data('jstree', false).empty();
 					$('#tree1').jstree({
-						'core' : {
-							'data' :
-							jsonarray
-						}
-					});
-					jsonarray = null;
-				}
-			});
-		}
-
-		function UploadFile2(){
-			var type = "file";          //后台接收时需要的参数名称，自定义即可
-			var id = "file";            //即input的id，用来寻找值
-			var formData = new FormData();
-			formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
-
-			$.ajax({
-				type: "POST",           //因为是传输文件，所以必须是post
-				url: '/upload',         //对应的后台处理类的地址
-				data: formData,
-				processData: false,
-				contentType: false,
-				dataType: 'json',
-				success: function (data) {
-
-					var jsonstr="[]";
-					var jsonarray = eval('('+jsonstr+')');
-					var arrays= data;
-
-					for(var i=0 ; i<arrays.length; i++){
-						var arr = {
-							"id":arrays[i].id,
-							"parent":arrays[i].parent,
-							"text":arrays[i].text,
-							"icon":arrays[i].icon
-						}
-						jsonarray.push(arr);
-					}
-					<!--console.log(jsonarray);-->
-					$('#tree2').data('jstree', false).empty();
-					$('#tree2').jstree({
-						'core' : {
-							'data' :
-							jsonarray
-						}
-					});
-					jsonarray = null;
-				}
-			});
-		}
-
-		// inline data demo
-
-
-
-		// interaction and events
-		$('#evts_button').on("click", function () {
-			var instance = $('#evts').jstree(true);
-			instance.deselect_all();
-			instance.select_node('1');
-		});
-		$('#evts')
-				.on("changed.jstree", function (e, data) {
-					if(data.selected.length) {
-						alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
-					}
-				})
-				.jstree({
 					'core' : {
-						'multiple' : false,
-						'data' : [
-							{ "text" : "Root node", "children" : [
-									{ "text" : "Child node 1", "id" : 1 },
-									{ "text" : "Child node 2" }
-								]}
-						]
+						'data' :
+						jsonarray
 					}
 				});
+				jsonarray = null;
+			}
+		});
+	}
+	
+	function UploadFile2(){
+		//alert(type);
+		var type = "file";          //后台接收时需要的参数名称，自定义即可
+		var id = "filename2";            //即input的id，用来寻找值
+		var formData = new FormData();
+		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
+	
+		$.ajax({
+			type: "POST",           //因为是传输文件，所以必须是post
+			url: '/upload',         //对应的后台处理类的地址
+			data: formData,
+			processData: false,
+			contentType: false,
+			dataType: 'json',
+			success: function (data) {
+	
+				var jsonstr="[]";
+				var jsonarray = eval('('+jsonstr+')');
+				 var arrays= data;
+	
+				for(var i=0 ; i<arrays.length; i++){
+				    var arr = {
+				            "id":arrays[i].id,
+				            "parent":arrays[i].parent,
+				            "text":arrays[i].text,
+							"icon":arrays[i].icon
+				    }
+				    jsonarray.push(arr);
+				}
+				console.log(jsonarray);
+				//$('#tree2').data('jstree', false).empty();
+					$('#tree2').jstree({
+					'core' : {
+						'data' :
+						jsonarray
+					}
+				});
+				jsonarray = null;
+			}
+		});
+	}
+
+   	// inline data demo
+   
+
+   
+   	// interaction and events
+   	$('#evts_button').on("click", function () {
+   		var instance = $('#evts').jstree(true);
+   		instance.deselect_all();
+   		instance.select_node('1');
+   	});
+   	$('#evts')
+   		.on("changed.jstree", function (e, data) {
+   			if(data.selected.length) {
+   				alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+   			}
+   		})
+   		.jstree({
+   			'core' : {
+   				'multiple' : false,
+   				'data' : [
+   					{ "text" : "Root node", "children" : [
+   							{ "text" : "Child node 1", "id" : 1 },
+   							{ "text" : "Child node 2" }
+   					]}
+   				]
+   			}
+   		});
 
 
-	</script>
+</script>
 </head>
 <body>
 
@@ -141,7 +142,7 @@
 
 	<div id="file1">
 		<h1>文件一</h1>
-		<input type="file" id="file" name="myfile" />
+		<input type="file" id="filename1" name="myfile" />
 
 		<input type="button" onclick="UploadFile1()" value="上传" />
 		<div id="tree1" class="demo"></div>
@@ -162,11 +163,12 @@
 
 	<div id="file2">
 		<h1>文件二</h1>
-		<input type="file" id="file" name="myfile" />
+		<input type="file" id="filename2" name="myfile" />
 
-		<input type="button" onclick="UploadFile2()" value="上传" />
-		<div id="tree2" class="demo">haha</div>
+		<input type="button" onclick="UpladFile2()" value="上传" />
+		<div id="tree2" class="demo"></div>
 	</div>
+
 
 
 
