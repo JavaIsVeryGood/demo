@@ -5,13 +5,15 @@
     <title>Title</title>
     <style>
    	html { margin:0; padding:0; font-size:62.5%; }
-   	body { max-width:1300px; min-width:300px; margin:0 auto; padding:20px 10px; font-size:14px; font-size:1.4em; }
+   	body { max-width:1500px; min-width:300px; margin:0 auto; padding:20px 10px; font-size:14px; font-size:1.4em; }
    	h1 { font-size:1.8em; text-align: center;}
    	.demo { overflow:auto; border:1px solid silver; min-height:600px;max-width: 500px; margin-top: 20px;}
-	#file1{float: left;width: 450px;padding: 20px;}
-	#file2{float: left;width: 450px;padding: 20px;}
-	#result{float: left;width: 200px;padding: 20px;}
-	
+	#file1{float: left;width: 430px;padding: 10px;}
+	#file2{float: left;width: 430px;padding: 10px;}
+	#result{float: left;width: 400px;padding: 0px;margin-top: 150px;}
+	.xpath{width: 330px;height: 30px;font-size: 20px;}
+	.xpath1,.xpath2{margin-bottom: 50px;}
+	#save_button{text-align: center;font-size: 20px;margin-left: 100px;}
     </style>
     <link/>
     <link rel="stylesheet"  th:href="@{/static/jstree/dist/themes/default/style.min.css}"/>
@@ -29,10 +31,16 @@
 	</div>
 
 	<div id="result">
-		<h1>结果</h1>
-		<button id="evts_button">select node with id 1</button>
-		<em>either click the button or a node in the tree</em>
-		<div id="evts"></div>
+		<div class="xpath1">
+			节点一：<input type="text" class="xpath" placeholder="请点选文件一节点或者自行输入"/>
+		</div>
+		
+		
+		<div class="xpath2">
+			节点二：<input type="text" class="xpath" placeholder="请点选文件二节点或者自行输入" />
+		</div>
+		<button id="save_button">添加这对节点</button>
+		
 	</div>
 
 	<div id="file2">
