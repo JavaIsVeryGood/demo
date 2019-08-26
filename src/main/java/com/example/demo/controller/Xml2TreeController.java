@@ -32,15 +32,17 @@ public class Xml2TreeController {
     public List<Node> upload(@RequestParam("file")MultipartFile file) throws IOException {
         /*if (file.isEmpty())
             return "上传失败，请重新选择文件！";*/
+        System.out.println(file.getOriginalFilename()+"111111111111111111");
+
         FileInputStream inputStream = (FileInputStream) file.getInputStream();
         Xml2json conver = new Xml2json();
         String json = conver.xml2json(inputStream);
         JSONObject jsonObject = JSON.parseObject(json, JSONObject.class, Feature.OrderedField);
-       // System.out.println(jsonObject);
+
         FormatJson formatJson = new FormatJson();
-       // formatJson.nodeList = null;
+
         formatJson.jsonLoop(jsonObject,"#");
-        String result = JSONArray.toJSONString(formatJson.nodeList);
+       // String result = JSONArray.toJSONString(formatJson.nodeList);
         System.out.println(formatJson.nodeList.size());
         return formatJson.nodeList;
     }

@@ -24,7 +24,7 @@
 
 	<div id="file1">
 		<h1>文件一</h1>
-		<input type="file" id="file" name="myfile" />
+		<input type="file" id="filename1" name="myfile" />
 
 		<input type="button" onclick="UpladFile1()" value="上传" />
 		<div id="tree1" class="demo"></div>
@@ -45,10 +45,10 @@
 
 	<div id="file2">
 		<h1>文件二</h1>
-		<input type="file" id="file" name="myfile" />
+		<input type="file" id="filename2" name="myfile" />
 
 		<input type="button" onclick="UpladFile2()" value="上传" />
-		<div id="tree2" class="demo">haha</div>
+		<div id="tree2" class="demo"></div>
 	</div>
 
 
@@ -63,7 +63,7 @@
 
 	function UpladFile1(){
 		var type = "file";          //后台接收时需要的参数名称，自定义即可
-		var id = "file";            //即input的id，用来寻找值
+		var id = "filename1";            //即input的id，用来寻找值
 		var formData = new FormData();
 		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
 
@@ -89,8 +89,8 @@
 				    }
 				    jsonarray.push(arr);
 				}
-				<!--console.log(jsonarray);-->
-				$('#tree1').data('jstree', false).empty();
+				console.log(jsonarray);
+				//$('#tree1').data('jstree', false).empty();
 					$('#tree1').jstree({
 					'core' : {
 						'data' :
@@ -103,8 +103,9 @@
 	}
 	
 	function UpladFile2(){
+		//alert(type);
 		var type = "file";          //后台接收时需要的参数名称，自定义即可
-		var id = "file";            //即input的id，用来寻找值
+		var id = "filename2";            //即input的id，用来寻找值
 		var formData = new FormData();
 		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
 	
@@ -130,8 +131,8 @@
 				    }
 				    jsonarray.push(arr);
 				}
-				<!--console.log(jsonarray);-->
-				$('#tree2').data('jstree', false).empty();
+				console.log(jsonarray);
+				//$('#tree2').data('jstree', false).empty();
 					$('#tree2').jstree({
 					'core' : {
 						'data' :
