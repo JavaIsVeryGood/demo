@@ -4,176 +4,238 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-   	html { margin:0; padding:0; font-size:62.5%; }
-   	body { max-width:1500px; min-width:300px; margin:0 auto; padding:20px 10px; font-size:14px; font-size:1.4em; }
-   	h1 { font-size:1.8em; text-align: center;}
-   	.demo { overflow:auto; border:1px solid silver; min-height:600px;max-width: 500px; margin-top: 20px;}
-	#file1{float: left;width: 430px;padding: 10px;}
-	#file2{float: left;width: 430px;padding: 10px;}
-	#result{float: left;width: 400px;padding: 0px;margin-top: 150px;}
-	.xpath{width: 330px;height: 30px;font-size: 20px;}
-	.xpath1,.xpath2{margin-bottom: 50px;}
-	#save_button{text-align: center;font-size: 20px;margin-left: 100px;}
+        html {
+            margin: 0;
+            padding: 0;
+            font-size: 62.5%;
+        }
+
+        body {
+            max-width: 1500px;
+            min-width: 300px;
+            margin: 0 auto;
+            padding: 20px 10px;
+            font-size: 14px;
+            font-size: 1.4em;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .demo {
+            overflow: auto;
+            border: 1px solid silver;
+            min-height: 600px;
+            max-width: 500px;
+            margin-top: 20px;
+        }
+
+        #file1 {
+            float: left;
+            width: 430px;
+            padding: 10px;
+        }
+
+        #file2 {
+            float: left;
+            width: 430px;
+            padding: 10px;
+        }
+
+        #result {
+            float: left;
+            width: 400px;
+            padding: 0px;
+            margin-top: 150px;
+        }
+
+        .xpath {
+            width: 330px;
+            height: 30px;
+            font-size: 20px;
+        }
+
+        .xpath1, .xpath2 {
+            margin-bottom: 50px;
+        }
+
+        #save_button {
+            text-align: center;
+            font-size: 20px;
+            margin-left: 100px;
+        }
     </style>
     <link/>
-    <link rel="stylesheet"  th:href="@{/static/jstree/dist/themes/default/style.min.css}"/>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript"   th:src="@{/static/jstree/dist/jstree.min.js}" rel="stylesheet"></script>
+    <link rel="stylesheet" th:href="@{/static/jstree/dist/themes/default/style.min.css}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" th:src="@{/static/jstree/dist/jstree.min.js}" rel="stylesheet"></script>
 
-<script>
+    <script>
 
-	function UploadFile1(){
-		var type = "file";          //后台接收时需要的参数名称，自定义即可
-		var id = "filename1";            //即input的id，用来寻找值
-		var formData = new FormData();
-		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
+        function UploadFile1() {
+            var type = "file";          //后台接收时需要的参数名称，自定义即可
+            var id = "filename1";            //即input的id，用来寻找值
+            var formData = new FormData();
+            formData.append(type, $("#" + id)[0].files[0]);    //生成一对表单属性
 
-		$.ajax({
-			type: "POST",           //因为是传输文件，所以必须是post
-			url: '/upload',         //对应的后台处理类的地址
-			data: formData,
-			processData: false,
-			contentType: false,
-			dataType: 'json',
-			success: function (data) {
+            $.ajax({
+                type: "POST",           //因为是传输文件，所以必须是post
+                url: '/upload',         //对应的后台处理类的地址
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (data) {
 
-				var jsonstr="[]";
-				var jsonarray = eval('('+jsonstr+')');
-				 var arrays= data;
+                    var jsonstr = "[]";
+                    var jsonarray = eval('(' + jsonstr + ')');
+                    var arrays = data;
 
-				for(var i=0 ; i<arrays.length; i++){
-				    var arr = {
-				            "id":arrays[i].id,
-				            "parent":arrays[i].parent,
-				            "text":arrays[i].text,
-							"icon":arrays[i].icon
-				    }
-				    jsonarray.push(arr);
-				}
-				console.log(jsonarray);
-				//$('#tree1').data('jstree', false).empty();
-					$('#tree1').jstree({
-					'core' : {
-						'data' :
-						jsonarray
-					}
-				});
-				jsonarray = null;
-			}
-		});
-	}
-	
-	function UploadFile2(){
-		//alert(type);
-		var type = "file";          //后台接收时需要的参数名称，自定义即可
-		var id = "filename2";            //即input的id，用来寻找值
-		var formData = new FormData();
-		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
-	
-		$.ajax({
-			type: "POST",           //因为是传输文件，所以必须是post
-			url: '/upload',         //对应的后台处理类的地址
-			data: formData,
-			processData: false,
-			contentType: false,
-			dataType: 'json',
-			success: function (data) {
-	
-				var jsonstr="[]";
-				var jsonarray = eval('('+jsonstr+')');
-				 var arrays= data;
-	
-				for(var i=0 ; i<arrays.length; i++){
-				    var arr = {
-				            "id":arrays[i].id,
-				            "parent":arrays[i].parent,
-				            "text":arrays[i].text,
-							"icon":arrays[i].icon
-				    }
-				    jsonarray.push(arr);
-				}
-				console.log(jsonarray);
-				//$('#tree2').data('jstree', false).empty();
-					$('#tree2').jstree({
-					'core' : {
-						'data' :
-						jsonarray
-					}
-				});
-				jsonarray = null;
-			}
-		});
-	}
+                    for (var i = 0; i < arrays.length; i++) {
+                        var arr = {
+                            "id": arrays[i].id,
+                            "parent": arrays[i].parent,
+                            "text": arrays[i].text,
+                            "icon": arrays[i].icon
+                        }
+                        jsonarray.push(arr);
+                    }
+                    console.log(jsonarray);
+                    //$('#tree1').data('jstree', false).empty();
+                    $('#tree1').jstree({
+                        'core': {
+                            'data':
+                            jsonarray
+                        }
+                    });
+                    jsonarray = null;
+                }
+            });
+        }
 
-   	// inline data demo
-   
+        function UploadFile2() {
+            //alert(type);
+            var type = "file";          //后台接收时需要的参数名称，自定义即可
+            var id = "filename2";            //即input的id，用来寻找值
+            var formData = new FormData();
+            formData.append(type, $("#" + id)[0].files[0]);    //生成一对表单属性
 
-   
-   	// interaction and events
-   	$('#evts_button').on("click", function () {
-   		var instance = $('#evts').jstree(true);
-   		instance.deselect_all();
-   		instance.select_node('1');
-   	});
-   	$('#evts')
-   		.on("changed.jstree", function (e, data) {
-   			if(data.selected.length) {
-   				alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
-   			}
-   		})
-   		.jstree({
-   			'core' : {
-   				'multiple' : false,
-   				'data' : [
-   					{ "text" : "Root node", "children" : [
-   							{ "text" : "Child node 1", "id" : 1 },
-   							{ "text" : "Child node 2" }
-   					]}
-   				]
-   			}
-   		});
+            $.ajax({
+                type: "POST",           //因为是传输文件，所以必须是post
+                url: '/upload',         //对应的后台处理类的地址
+                data: formData,
+                processData: false,
+                contentType: false,
+                dataType: 'json',
+                success: function (data) {
+
+                    var jsonstr = "[]";
+                    var jsonarray = eval('(' + jsonstr + ')');
+                    var arrays = data;
+
+                    for (var i = 0; i < arrays.length; i++) {
+                        var arr = {
+                            "id": arrays[i].id,
+                            "parent": arrays[i].parent,
+                            "text": arrays[i].text,
+                            "icon": arrays[i].icon
+                        }
+                        jsonarray.push(arr);
+                    }
+                    console.log(jsonarray);
+                    //$('#tree2').data('jstree', false).empty();
+                    $('#tree2').jstree({
+                        'core': {
+                            'data':
+                            jsonarray
+                        }
+                    });
+                    jsonarray = null;
+                }
+            });
+        }
+
+        // inline data demo
 
 
-</script>
+        // interaction and events
+        $('#evts_button').on("click", function () {
+            var instance = $('#evts').jstree(true);
+            instance.deselect_all();
+            instance.select_node('1');
+        });
+        $('#evts')
+            .on("changed.jstree", function (e, data) {
+                if (data.selected.length) {
+                    alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+                }
+            })
+            .jstree({
+                'core': {
+                    'multiple': false,
+                    'data': [
+                        {
+                            "text": "Root node", "children": [
+                                {"text": "Child node 1", "id": 1},
+                                {"text": "Child node 2"}
+                            ]
+                        }
+                    ]
+                }
+            });
+
+        function getSelectNodeId() {
+            var treeNode = $('#treeSource').jstree(true).get_selected(true)[0]; //获取所有选中的节点对象
+            var nodeId = tr.original.id;
+            return nodeId;
+        }
+
+        function selectTreeNode(id) {
+            $('#treeSource').jstree("deselect_all", true);
+            // id是选中的节点id，然后后面的一个参数 true表示的是不触发默认select_node.change的事件
+            $('#treeSource').jstree('select_node', id)
+        }
+
+        $('#frmt')
+            .on("changed.jstree", function (e, data) {
+                if (data.selected.length) {
+                    alert('The selected node is: ' + data.instance.get_node(data.selected[0]).text);
+                }
+            })
+    </script>
 </head>
 <body>
 
 
+<div id="file1">
+    <h1>文件一</h1>
+    <input type="file" id="filename1" name="myfile"/>
 
-	<div id="file1">
-		<h1>文件一</h1>
-		<input type="file" id="filename1" name="myfile" />
-
-		<input type="button" onclick="UploadFile1()" value="上传" />
-		<div id="tree1" class="demo"></div>
-	</div>
-
-	<div id="result">
-		<div class="xpath1">
-			节点一：<input type="text" class="xpath" placeholder="请点选文件一节点或者自行输入"/>
-		</div>
-		
-		
-		<div class="xpath2">
-			节点二：<input type="text" class="xpath" placeholder="请点选文件二节点或者自行输入" />
-		</div>
-		<button id="save_button">添加这对节点</button>
-		
-	</div>
-
-	<div id="file2">
-		<h1>文件二</h1>
-		<input type="file" id="filename2" name="myfile" />
-
-		<input type="button" onclick="UpladFile2()" value="上传" />
-		<div id="tree2" class="demo"></div>
-	</div>
+    <input type="button" onclick="UploadFile1()" value="上传"/>
+    <div id="tree1" class="demo"></div>
+</div>
+<div id="result">
+    <div class="xpath1">
+        节点一：<input type="text" class="xpath" placeholder="请点选文件一节点或者自行输入"/>
+    </div>
 
 
+    <div class="xpath2">
+        节点二：<input type="text" class="xpath" placeholder="请点选文件二节点或者自行输入"/>
+    </div>
+    <button id="save_button">添加这对节点</button>
 
+</div>
 
+<div id="file2">
+    <h1>文件二</h1>
+    <input type="file" id="filename2" name="myfile"/>
 
-
+    <input type="button" onclick="UploadFile2()" value="上传"/>
+    <div id="tree2" class="demo"></div>
+</div>
 
 
 </body>
