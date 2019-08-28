@@ -21,18 +21,13 @@ import java.util.List;
 @Controller
 public class Xml2TreeController {
 
-    @RequestMapping(value = {"/","/index"})
-   // @ResponseBody
-    public String index(){
-        return "hello";
-    }
 
-    @RequestMapping(value = "/upload",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public List<Node> upload(@RequestParam("file")MultipartFile file) throws IOException {
+    public List<Node> upload(@RequestParam("file") MultipartFile file) throws IOException {
         /*if (file.isEmpty())
             return "上传失败，请重新选择文件！";*/
-        System.out.println(file.getOriginalFilename()+"111111111111111111");
+        System.out.println(file.getOriginalFilename() + "111111111111111111");
 
         FileInputStream inputStream = (FileInputStream) file.getInputStream();
         Xml2json conver = new Xml2json();
@@ -41,8 +36,8 @@ public class Xml2TreeController {
 
         FormatJson formatJson = new FormatJson();
 
-        formatJson.jsonLoop(jsonObject,"#");
-       // String result = JSONArray.toJSONString(formatJson.nodeList);
+        formatJson.jsonLoop(jsonObject, "#");
+        // String result = JSONArray.toJSONString(formatJson.nodeList);
         System.out.println(formatJson.nodeList.size());
         return formatJson.nodeList;
     }
