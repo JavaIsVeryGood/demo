@@ -27,7 +27,7 @@ public class Xml2json {
             //System.out.println(xml);
             xmlJSONObj = XML.toJSONObject(xml);
             //String jsonPrettyPrintString = xmlJSONObj.toString(4);       //设置缩进
-            System.out.println(xmlJSONObj);
+          //  System.out.println(xmlJSONObj);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

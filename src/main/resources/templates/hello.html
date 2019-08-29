@@ -29,7 +29,7 @@
 		var id = "filename1";            //即input的id，用来寻找值
 		var formData = new FormData();
 		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
-
+		var fn1 = "";
 		$.ajax({
 			type: "POST",           //因为是传输文件，所以必须是post
 			url: '/upload',         //对应的后台处理类的地址
@@ -38,10 +38,11 @@
 			contentType: false,
 			dataType: 'json',
 			success: function (data) {
-
+				fn1 = $("#filename1").val();			//带路径的文件名
+				fn1 = fn1.substring(fn1.lastIndexOf("\\")+1,fn1.lastIndexOf("."));		//文件名
 				var jsonstr="[]";
 				var jsonarray = eval('('+jsonstr+')');
-				 var arrays= data;
+				var arrays= data;
 
 				for(var i=0 ; i<arrays.length; i++){
 				    var arr = {
@@ -67,7 +68,8 @@
 					 $("#xpath1").val(tree.get_path(data.node,'/',false));
 					 
 				});
-
+				$("#fn1").val(fn1);
+				alert($("#fn1").val());
 				jsonarray = null;
 			}
 		});
@@ -79,7 +81,7 @@
 		var id = "filename2";            //即input的id，用来寻找值
 		var formData = new FormData();
 		formData.append(type, $("#"+id)[0].files[0]);    //生成一对表单属性
-
+		var fn2 = "";
 		$.ajax({
 			type: "POST",           //因为是传输文件，所以必须是post
 			url: '/upload',         //对应的后台处理类的地址
@@ -88,7 +90,8 @@
 			contentType: false,
 			dataType: 'json',
 			success: function (data) {
-
+				fn2 = $("#filename2").val();				//带路径的文件名
+				fn2 = fn2.substring(fn2.lastIndexOf("\\")+1,fn2.lastIndexOf("."));	//文件名
 				var jsonstr="[]";
 				var jsonarray = eval('('+jsonstr+')');
 				 var arrays= data;
@@ -117,12 +120,30 @@
 					$("#xpath2").val(tree.get_path(data.node,'/',false));
 					 
 				});
+				$("#fn2").val(fn2);
+				alert($("#fn2").val());
 				jsonarray = null;
 			}
 		});
 	}
 
+	 $(function(){
+		$('#save_button').click(function(){
+			
+			$.ajax({
+				type: "get",           //因为是传输文件，所以必须是post
+				url: '/saveXpath',         //对应的后台处理类的地址
+				data: {'filename1':$("#fn1").val(),'filename2':$("#fn1").val(),'xpath1':$("#xpath1").val(),'xpath2':$("#xpath2").val()},
+				contentType: false,
+				dataType: 'json',
+				success: function (data) {
 
+					alert("添加成功");
+				}
+			});
+
+		});
+	});
 
 
 
@@ -149,7 +170,7 @@
 		<div class="xp2">
 			节点二：<input type="text" class="xpath" id="xpath2" name="xpath2" placeholder="请点选文件二节点或者自行输入" />
 		</div>
-		<button id="save_button">添加这对节点</button>
+		<button id="save_button" >添加这对节点</button>
 		
 	</div>
 
@@ -160,7 +181,8 @@
 		<input type="button" onclick="UploadFile2()" value="上传" />
 		<div id="tree2" class="demo"></div>
 	</div>
-
-
+	
+	<input id="fn1" type="hidden" />
+	<input id="fn2" type="hidden" />
 </body>
 </html>

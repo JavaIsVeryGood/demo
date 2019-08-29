@@ -1,0 +1,24 @@
+logging:
+  level:
+    org.springframework.web: trace
+    com.example.demo.mapper.ResultMapper: debug
+
+##thymeleaf
+spring:
+  thymeleaf:
+    prefix: classpath:/templates/
+    cache: false
+  mvc:
+    static-path-pattern: /static/**
+
+#mybatis:
+#  configuration:
+#    map-underscore-to-camel-case: true
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/xml?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+
+
