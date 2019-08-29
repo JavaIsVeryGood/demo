@@ -16,7 +16,7 @@ spring:
 #    map-underscore-to-camel-case: true
 
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/xml?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.23.69:3306/xml?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
