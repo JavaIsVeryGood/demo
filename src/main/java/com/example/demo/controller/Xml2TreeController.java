@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+/*
+将数据转为jstree可识别的json，并展示为树
+ */
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
 import com.example.demo.pojo.Node;
@@ -32,18 +34,16 @@ public class Xml2TreeController {
     public List<Node> upload(@RequestParam("file")MultipartFile file) throws IOException {
         /*if (file.isEmpty())
             return "上传失败，请重新选择文件！";*/
-        System.out.println(file.getOriginalFilename()+"111111111111111111");
 
-        FileInputStream inputStream = (FileInputStream) file.getInputStream();
+        FileInputStream inputStream = (FileInputStream) file.getInputStream();      //文件流
         Xml2json conver = new Xml2json();
-        String json = conver.xml2json(inputStream);
+        String json = conver.xml2json(inputStream);                                 //将xml文件转为json字符串
         JSONObject jsonObject = JSON.parseObject(json, JSONObject.class, Feature.OrderedField);
 
         FormatJson formatJson = new FormatJson();
 
-        formatJson.jsonLoop(jsonObject,"#");
-       // String result = JSONArray.toJSONString(formatJson.nodeList);
-        System.out.println(formatJson.nodeList.size());
+        formatJson.jsonLoop(jsonObject,"#");                                //转换为jstree可识别的json数组
+
         return formatJson.nodeList;
     }
 
