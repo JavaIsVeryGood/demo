@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.example.demo.mapper.ResultMapper;
 import com.example.demo.pojo.Xpaths;
+import com.example.demo.service.ResultService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class ResultTest {
 
     @Autowired
     ResultMapper resultMapper;
+
+    @Autowired
+    ResultService resultService;
     @Test
     public void test() throws ParseException {
         Date dt = new Date();
@@ -36,5 +40,6 @@ public class ResultTest {
       //  System.out.println(currentTime);
         resultMapper.insertXpath(xpaths);
 
+        resultService.selectBothFilename();
     }
 }
