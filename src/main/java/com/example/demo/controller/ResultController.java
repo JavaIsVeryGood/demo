@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.xml.crypto.Data;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -49,8 +51,19 @@ public class ResultController {
     @ResponseBody
     public Map<String,String> selectBothFilename(){
 
+
+        for (Map.Entry<String, String> item : resultService.selectBothFilename().entrySet()){
+            System.out.println(item.getKey()+"###"+item.getValue());
+        }
          return  resultService.selectBothFilename();
 
+    }
+
+    @RequestMapping(value = "/allXpaths")
+    @ResponseBody
+    public  List<Xpaths> selectXpaths(){
+
+        return  resultService.selectXpaths();
     }
 
 }

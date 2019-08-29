@@ -10,7 +10,10 @@ import java.util.Map;
 
 public interface ResultService {
 
-    public boolean saveXpath(Xpaths xpaths);
+     boolean saveXpath(Xpaths xpaths);
 
-    public Map<String,String> selectBothFilename();
+     Map<String,String> selectBothFilename();
+
+     List<Xpaths> selectXpaths();
+
 }
