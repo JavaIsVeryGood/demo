@@ -23,27 +23,19 @@ import java.util.List;
 @Controller
 public class Xml2TreeController {
 
-    @RequestMapping(value = {"/","/index"})
-   // @ResponseBody
-    public String index(){
-        return "hello";
-    }
 
-    @RequestMapping(value = "/upload",method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/upload", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
-    public List<Node> upload(@RequestParam("file")MultipartFile file) throws IOException {
+    public List<Node> upload(@RequestParam("file") MultipartFile file) throws IOException {
         /*if (file.isEmpty())
             return "上传失败，请重新选择文件！";*/
-
         FileInputStream inputStream = (FileInputStream) file.getInputStream();      //文件流
         Xml2json conver = new Xml2json();
         String json = conver.xml2json(inputStream);                                 //将xml文件转为json字符串
         JSONObject jsonObject = JSON.parseObject(json, JSONObject.class, Feature.OrderedField);
 
         FormatJson formatJson = new FormatJson();
-
         formatJson.jsonLoop(jsonObject,"#");                                //转换为jstree可识别的json数组
-
         return formatJson.nodeList;
     }
 
