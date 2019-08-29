@@ -1,7 +1,14 @@
 <!DOCTYPE html >
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="zh">
+<div th:replace="/head::myHeader"></div>
 <head>
     <meta charset="UTF-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="js/head.js"></script>
+	<link href="css/head.css" rel="stylesheet" type="text/css">
     <title>Title</title>
     <style>
         html {
@@ -206,10 +213,6 @@
 </head>
 <body>
 
-	<div >
-		<iframe align="top" width="100%" height="100%" src="/head" frameborder="no" border="0" marginwidth="-30px"
-				marginheight="-30px" scrolling="no"></iframe>
-	</div>
 <div id="file1">
     <h1>文件一</h1>
     <input type="file" id="filename1" name="myfile"/>
