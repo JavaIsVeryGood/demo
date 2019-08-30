@@ -65,7 +65,7 @@ public class ResultController {
     //@ResponseBody
     public  String selectXpaths(Model model){
 
-        model.addAttribute(resultService.selectXpaths());
+        model.addAttribute("Xpaths",resultService.selectXpaths());
         return  "result";
     }
 
