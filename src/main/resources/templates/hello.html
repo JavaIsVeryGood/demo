@@ -193,7 +193,7 @@
 			$.ajax({
 				type: "get",           //因为是传输文件，所以必须是post
 				url: '/saveXpath',         //对应的后台处理类的地址
-				data: {'filename1':$("#fn1").val(),'filename2':$("#fn1").val(),'xpath1':$("#xpath1").val(),'xpath2':$("#xpath2").val()},
+				data: {'filename1':$("#fn1").val(),'filename2':$("#fn2").val(),'xpath1':$("#xpath1").val(),'xpath2':$("#xpath2").val()},
 				contentType: false,
 				dataType: 'json',
 				success: function (data) {
@@ -216,18 +216,8 @@
 
 <div id="file1">
     <h1>文件一</h1>
-<!--    <input type="file" id="filename1" name="myfile"/>-->
-
-    <input type="button" onclick="UploadFile1()" value="上传"/>
-    <div class="input-group">
-        <label for="filename1"></label><input name="myfile" id="filename1" type="text" class="form-control" οnkeydοwn="return false;" οnpaste="return false;" placeholder="Select file...">
-        <label class="input-group-btn">
-                        <span class="btn btn-primary">
-                            <i class="glyphicon glyphicon-folder-open"></i>  
-                            Browse… <input type="file" style="display: none;" multiple>
-                        </span>
-        </label>
-    </div>
+    <input type="file" id="filename1" name="myfile"/>
+<!--    <input type="button" onclick="UploadFile1()" value="上传"/>-->
     <button class="btn btn-primary" onclick="UploadFile1()">上传</button>
     <div id="tree1" class="demo"></div>
 </div>

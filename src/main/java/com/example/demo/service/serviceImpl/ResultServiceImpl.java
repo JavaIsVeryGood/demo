@@ -55,7 +55,7 @@ public class ResultServiceImpl implements ResultService {
 
 
         List<Xpaths> xpathsList = resultMapper.selectXpaths();
-        System.out.println(xpathsList);
-        return null;
+        //System.out.println(xpathsList);
+        return xpathsList;
     }
 }
