@@ -8,6 +8,7 @@ import com.example.demo.pojo.Xpaths;
 import com.example.demo.service.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -59,11 +60,13 @@ public class ResultController {
 
     }
 
+    //上传所有xpaths
     @RequestMapping(value = "/allXpaths")
-    @ResponseBody
-    public  List<Xpaths> selectXpaths(){
+    //@ResponseBody
+    public  String selectXpaths(Model model){
 
-        return  resultService.selectXpaths();
+        model.addAttribute(resultService.selectXpaths());
+        return  "result";
     }
 
 }

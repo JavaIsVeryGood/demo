@@ -10,14 +10,6 @@ public class Xpaths {
 
     private String xpath1;
 
-    public String getFilename2() {
-        return filename2;
-    }
-
-    public void setFilename2(String filename2) {
-        this.filename2 = filename2;
-    }
-
     private String filename2;
 
     private String xpath2;
@@ -25,6 +17,14 @@ public class Xpaths {
     private Date updateTime;
 
     private int pId;
+
+    public String getFilename2() {
+        return filename2;
+    }
+
+    public void setFilename2(String filename2) {
+        this.filename2 = filename2;
+    }
 
     public int getId() {
         return id;
