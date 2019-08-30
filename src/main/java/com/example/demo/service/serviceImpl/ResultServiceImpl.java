@@ -16,35 +16,34 @@ public class ResultServiceImpl implements ResultService {
 
     @Override
     public boolean saveXpath(Xpaths xpaths) {
-        try{
+        try {
             resultMapper.insertXpath(xpaths);
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
         return true;
     }
 
     @Override
-    public Map<String,String> selectBothFilename() {
+    public Map<String, String> selectBothFilename() {
 
         List<Xpaths> xpathsList = resultMapper.selectBothFilename();
         System.out.println(xpathsList.toString());
-        Map<String,String> map = new HashMap();
-        for (Xpaths xpath:xpathsList){
-            map.put(xpath.getFilename1(),xpath.getFilename2());
+        Map<String, String> map = new HashMap();
+        for (Xpaths xpath : xpathsList) {
+            map.put(xpath.getFilename1(), xpath.getFilename2());
         }
 
-        for (Iterator<Map.Entry<String, String>> it = map.entrySet().iterator(); it.hasNext();){
+        for (Iterator<Map.Entry<String, String>> it = map.entrySet().iterator(); it.hasNext(); ) {
             Map.Entry<String, String> item = it.next();
             //... todo with item
-            for (String key:map.keySet()){
-                if (item.getValue().equals(key)){
+            for (String key : map.keySet()) {
+                if (item.getValue().equals(key)) {
                     it.remove();
                     break;
                 }
             }
         }
-
 
 
         return map;

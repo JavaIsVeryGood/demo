@@ -9,48 +9,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <link rel="stylesheet" th:href="@{/static/jstree/dist/themes/default/style.min.css}"/>
     <script type="text/javascript" th:src="@{/static/jstree/dist/jstree.min.js}" rel="stylesheet"></script>
-    <link th:href="@{~/static/css/head.css}" rel="stylesheet" type="text/css" >
+    <link th:href="@{~/static/css/head.css}" rel="stylesheet" type="text/css">
     <script th:src="@{~/static/js/head.js}"></script>
     <title>Title</title>
     <style>
-        html {
-            margin: 0;
-            padding: 0;
-            font-size: 62.5%;
-        }
-
-        body {
-            max-width: 1500px;
-            min-width: 300px;
-            margin: 0 auto;
-            padding: 20px 10px;
-            font-size: 14px;
-            font-size: 1.4em;
-        }
-
         h1 {
             font-size: 1.8em;
             text-align: center;
-        }
-
-        .demo {
-            overflow: auto;
-            border: 1px solid silver;
-            min-height: 600px;
-            max-width: 500px;
-            margin-top: 20px;
-        }
-
-        #file1 {
-            float: left;
-            width: 430px;
-            padding: 10px;
-        }
-
-        #file2 {
-            float: left;
-            width: 430px;
-            padding: 10px;
         }
 
         #result {
@@ -73,7 +38,8 @@
         #save_button {
             text-align: center;
             font-size: 20px;
-            margin-left: 100px;
+            margin: 0px auto;
+            display: table;
         }
 
         #mes {
@@ -129,7 +95,6 @@
 
                     });
                     $("#fn1").val(fn1);
-                    alert($("#fn1").val());
                     jsonarray = null;
                 }
             });
@@ -181,30 +146,34 @@
 
                     });
                     $("#fn2").val(fn2);
-                    alert($("#fn2").val());
                     jsonarray = null;
                 }
             });
         }
 
-	 $(function(){
-		$('#save_button').click(function(){
-			
-			$.ajax({
-				type: "get",           //因为是传输文件，所以必须是post
-				url: '/saveXpath',         //对应的后台处理类的地址
-				data: {'filename1':$("#fn1").val(),'filename2':$("#fn2").val(),'xpath1':$("#xpath1").val(),'xpath2':$("#xpath2").val()},
-				contentType: false,
-				dataType: 'json',
-				success: function (data) {
-					//alert(data == false);
-					if (data == false)
+        $(function () {
+            $('#save_button').click(function () {
 
-						$("#mes").html("添加失败");
-					else
-						$("#mes").html("添加成功");
-				}
-			});
+                $.ajax({
+                    type: "get",           //因为是传输文件，所以必须是post
+                    url: '/saveXpath',         //对应的后台处理类的地址
+                    data: {
+                        'filename1': $("#fn1").val(),
+                        'filename2': $("#fn2").val(),
+                        'xpath1': $("#xpath1").val(),
+                        'xpath2': $("#xpath2").val()
+                    },
+                    contentType: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        //alert(data == false);
+                        if (data == false)
+
+                            $("#mes").html("添加失败");
+                        else
+                            $("#mes").html("添加成功");
+                    }
+                });
 
             });
         });
@@ -213,37 +182,41 @@
     </script>
 </head>
 <body>
+<div class="row">
+    <div class="col-1"></div>
+    <div id="file1" class="col">
+        <h1>文件一</h1>
+        <input type="file" id="filename1" name="myfile"/>
+        <button class="btn btn-primary" onclick="UploadFile1()">上传</button>
+        <div id="tree1" class="demo"></div>
+    </div>
+    <div id="result" class="col">
+        <div class="xp1">
+            节点一：<label for="xpath1"></label><input type="text" class="xpath" id="xpath1" name="xpath1"
+                                                   placeholder="请点选文件一节点或者自行输入"/>
+        </div>
 
-<div id="file1">
-    <h1>文件一</h1>
-    <input type="file" id="filename1" name="myfile"/>
-<!--    <input type="button" onclick="UploadFile1()" value="上传"/>-->
-    <button class="btn btn-primary" onclick="UploadFile1()">上传</button>
-    <div id="tree1" class="demo"></div>
-</div>
 
-<div id="result">
-    <div class="xp1">
-        节点一：<input type="text" class="xpath" id="xpath1" name="xpath1" placeholder="请点选文件一节点或者自行输入"/>
+        <div class="xp2">
+            节点二：<label for="xpath2"></label><input type="text" class="xpath" id="xpath2" name="xpath2"
+                                                   placeholder="请点选文件二节点或者自行输入"/>
+        </div>
+        <button id="save_button" class="btn btn-success">
+            配对
+        </button>
+        <span id="mes"></span>
+
     </div>
 
-
-    <div class="xp2">
-        节点二：<input type="text" class="xpath" id="xpath2" name="xpath2" placeholder="请点选文件二节点或者自行输入" style="width: 300px;word-wrap: break-word;word-break: break-all"/>
+    <div id="file2" class="col">
+        <h1>文件二</h1>
+        <input type="file" id="filename2" name="myfile"/>
+        <button type="submit" class="btn btn-primary" onclick="UploadFile2()">上传</button>
+        <div id="tree2" class="demo"></div>
     </div>
-    <button id="save_button">添加这对节点</button>
-    <span id="mes"></span>
-
+    <input id="fn1" type="hidden"/>
+    <input id="fn2" type="hidden"/>
+    <div class="col-1"></div>
 </div>
-
-<div id="file2">
-    <h1>文件二</h1>
-    <input type="file" id="filename2" name="myfile"/>
-    <button type="submit" class="btn btn-primary" onclick="UploadFile2()">上传</button>
-    <div id="tree2" class="demo"></div>
-</div>
-
-<input id="fn1" type="hidden"/>
-<input id="fn2" type="hidden"/>
 </body>
 </html>

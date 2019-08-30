@@ -3,6 +3,7 @@ package com.example.demo.controller;
 /*
 将数据转为jstree可识别的json，并展示为树
  */
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.parser.Feature;
@@ -35,7 +36,7 @@ public class Xml2TreeController {
         JSONObject jsonObject = JSON.parseObject(json, JSONObject.class, Feature.OrderedField);
 
         FormatJson formatJson = new FormatJson();
-        formatJson.jsonLoop(jsonObject,"#");                                //转换为jstree可识别的json数组
+        formatJson.jsonLoop(jsonObject, "#");                                //转换为jstree可识别的json数组
         return formatJson.nodeList;
     }
 

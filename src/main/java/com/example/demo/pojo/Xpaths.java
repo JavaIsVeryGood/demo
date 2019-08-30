@@ -51,7 +51,6 @@ public class Xpaths {
     }
 
 
-
     public String getXpath2() {
         return xpath2;
     }
