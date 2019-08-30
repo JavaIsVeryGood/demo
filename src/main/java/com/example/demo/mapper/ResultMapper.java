@@ -22,4 +22,7 @@ public interface ResultMapper {
 
     @Select("select filename1 , filename2 from " + TABLE_NAME  )
     public List<Xpaths> selectBothFilename();
+
+    @Select("select * from " + TABLE_NAME + "order by updatetime desc")
+    List<Xpaths> selectXpaths();
 }

@@ -38,8 +38,10 @@ public class ResultTest {
         xpaths.setXpath2("xpath2");
         xpaths.setUpdateTime(new Date());
       //  System.out.println(currentTime);
-        resultMapper.insertXpath(xpaths);
+        //resultMapper.insertXpath(xpaths);
 
-        resultService.selectBothFilename();
+        //resultService.selectBothFilename();
+
+        resultService.selectXpaths();
     }
 }

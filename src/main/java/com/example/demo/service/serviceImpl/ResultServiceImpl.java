@@ -45,6 +45,17 @@ public class ResultServiceImpl implements ResultService {
             }
         }
 
+
+
         return map;
+    }
+
+    @Override
+    public List<Xpaths> selectXpaths() {
+
+
+        List<Xpaths> xpathsList = resultMapper.selectXpaths();
+        System.out.println(xpathsList);
+        return null;
     }
 }

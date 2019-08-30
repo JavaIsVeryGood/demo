@@ -187,29 +187,24 @@
             });
         }
 
-        $(function () {
-            $('#save_button').click(function () {
+	 $(function(){
+		$('#save_button').click(function(){
+			
+			$.ajax({
+				type: "get",           //因为是传输文件，所以必须是post
+				url: '/saveXpath',         //对应的后台处理类的地址
+				data: {'filename1':$("#fn1").val(),'filename2':$("#fn1").val(),'xpath1':$("#xpath1").val(),'xpath2':$("#xpath2").val()},
+				contentType: false,
+				dataType: 'json',
+				success: function (data) {
+					//alert(data == false);
+					if (data == false)
 
-                $.ajax({
-                    type: "get",           //因为是传输文件，所以必须是post
-                    url: '/saveXpath',         //对应的后台处理类的地址
-                    data: {
-                        'filename1': $("#fn1").val(),
-                        'filename2': $("#fn1").val(),
-                        'xpath1': $("#xpath1").val(),
-                        'xpath2': $("#xpath2").val()
-                    },
-                    contentType: false,
-                    dataType: 'json',
-                    success: function (data) {
-                        //alert(data == false);
-                        if (data == false)
-
-                            $("#mes").html("添加失败");
-                        else
-                            $("#mes").html("添加成功");
-                    }
-                });
+						$("#mes").html("添加失败");
+					else
+						$("#mes").html("添加成功");
+				}
+			});
 
             });
         });
