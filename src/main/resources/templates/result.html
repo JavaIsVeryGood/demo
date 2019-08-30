@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="/head::myHeader"></div>
 <head>
     <meta charset="utf-8">
     <title>result</title>
@@ -9,55 +10,55 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link th:href="@{~/static/css/head.css}" rel="stylesheet" type="text/css" >
     <script th:src="@{~/static/js/head.js}"></script>
+<!--    <script>-->
+<!--        function getInform() {-->
+<!--            var optionJson=[];-->
+<!--            $.ajax({-->
+<!--                type:"post",-->
+<!--                url:"/allXpath",-->
+<!--                data:{filename1: },-->
+<!--                async:false,-->
+<!--                success:function (data) {-->
+<!--                    optionJson=data;-->
+<!--                    var str="";-->
+<!--                    str+="<tr>"+-->
+<!--                            "<td>"+optionJson.-->
+<!--                }-->
+<!--            })-->
+
+<!--        }-->
+
+<!--    </script>-->
 </head>
 <body>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark navbar-offcanvas">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/index">HOME</a>
-        <ul class="navbar-nav navbar-top">
-            <li class="nav-item active">
-                <a class="nav-link" href="/index">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/result">结果页面</a>
-            </li>
-        </ul>
-        <button class="navbar-toggler navbar-toggler-right navbar-icon" type="button" data-toggle="collapse"
-                data-target="#navbar-mobile" aria-controls="navbar-mobile" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="icon-bar bar1"></span>
-            <span class="icon-bar bar2"></span>
-            <span class="icon-bar bar3"></span>
-        </button>
-        <div class="navbar-collapse collapse ml-auto " id="navbar-mobile" style="overflow: auto;">
-
-            <!--			<div class="pre-scrollable">-->
-
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-image">
-                    <img src="logo.png" alt="">
-                </li>
-                <!--循环100次-->
-                <li th:each="i:${#numbers.sequence(1,100)}" class="nav-item">
-                    <a href="#!" class="nav-link">Link 1</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#!" class="nav-link">Link 2</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#!" class="nav-link">Link 3</a>
-                </li>
-            </ul>
-            <!--			</div>-->
-        </div>
-    </div>
-</nav>
 <div class="wrapper">
-    <table>
-        <tr th:each="i:${#numbers.sequence(1,10)}">row!</tr>
+    <table class="table table-dark">
+        <thead>
+        <tr>
+            <th>文件名1</th>
+            <th>Xpath1</th>
+            <th>文件名2</th>
+            <th>Xpath2</th>
+            <th>更新时间</th>
+            <th>操作人</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="i:${Xpaths}">
+                <td th:text="${i.filename1}"></td>
+                <td style="overflow: auto;width: 300px;word-wrap: break-word;word-break: break-all" th:text="${i.xpath1}"></td>
+                <td th:text="${i.filename2}"></td>
+                <td style="overflow: auto;width: 300px;word-wrap: break-word;word-break: break-all" th:text="${i.xpath2}"></td>
+                <td th:text="${i.updateTime}"></td>
+                <td>Author</td>
+                <td>
+                    <button type="button" class="btn btn-primary">修改</button>
+                    <button type="button" class="btn btn-danger">删除</button>
+                </td>
+            </tr>
+        </tbody>
     </table>
-    text&nbsp;text&nbsp;text&nbsp;text&nbsp;text&nbsp;text&nbsp;text&nbsp;
 </div>
 </body>
 </html>
