@@ -30,6 +30,7 @@
  </xs:complexType>
 </xs:element>
 
+
 </xs:schema>
 
 <?xml version="1.0" encoding="ISO-8859-1" ?>
@@ -63,5 +64,4 @@
   <xs:attribute name="orderid" type="xs:string" use="required"/>
  </xs:complexType>
 </xs:element>
-
 </xs:schema>
