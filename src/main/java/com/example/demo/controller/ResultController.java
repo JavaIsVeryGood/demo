@@ -28,9 +28,9 @@ public class ResultController {
     //保存xpath数据
     @RequestMapping(value = "/saveXpath")
     @ResponseBody
-    public boolean saveXpath(String filename1,String filename2,String xpath1,String xpath2){
+    public boolean saveXpath(String filename1, String filename2, String xpath1, String xpath2) {
 
-        System.out.println("filename1:"+filename1+"filename2:"+filename2+"xpath1:"+xpath1+"xpath2:"+xpath2);
+        System.out.println("filename1:" + filename1 + "filename2:" + filename2 + "xpath1:" + xpath1 + "xpath2:" + xpath2);
         if (filename1 == null || filename2 == null || xpath1 == "" || xpath1 == null || xpath2 == "" || xpath2 == null)
             return false;
         Xpaths xpaths = new Xpaths();
@@ -42,7 +42,7 @@ public class ResultController {
         xpaths.setUpdateTime(new Date());
         System.out.println(xpaths.toString());
         boolean isSuccess = resultService.saveXpath(xpaths);
-       // System.out.println(resultMapper.insertFilename(filename1,filename2,xpath1,xpath2));
+        // System.out.println(resultMapper.insertFilename(filename1,filename2,xpath1,xpath2));
         return isSuccess;
     }
 
@@ -50,23 +50,23 @@ public class ResultController {
 
     @RequestMapping(value = "/filenames")
     @ResponseBody
-    public Map<String,String> selectBothFilename(){
+    public Map<String, String> selectBothFilename() {
 
 
-        for (Map.Entry<String, String> item : resultService.selectBothFilename().entrySet()){
-            System.out.println(item.getKey()+"###"+item.getValue());
+        for (Map.Entry<String, String> item : resultService.selectBothFilename().entrySet()) {
+            System.out.println(item.getKey() + "###" + item.getValue());
         }
-         return  resultService.selectBothFilename();
+        return resultService.selectBothFilename();
 
     }
 
     //上传所有xpaths
     @RequestMapping(value = "/allXpaths")
     //@ResponseBody
-    public  String selectXpaths(Model model){
+    public String selectXpaths(Model model) {
 
-        model.addAttribute("Xpaths",resultService.selectXpaths());
-        return  "result";
+        model.addAttribute("Xpaths", resultService.selectXpaths());
+        return "result";
     }
 
 }
